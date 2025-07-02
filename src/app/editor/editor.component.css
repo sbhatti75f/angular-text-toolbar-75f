@@ -99,13 +99,15 @@
   white-space: nowrap;
 }
 
-/* Custom sizes for each tooltip */
 .text-size[data-name]::before {
   width: 55px;
   height: 15px;
-  left: 10px;
+  left: -5px;
   transform: none;
 }
+
+
+/*************************************************************************/
 
 .bold[data-name]::before {
   width: 35px;
@@ -124,14 +126,14 @@
 .alignment[data-name]::before {
   width: 80px;
   height: 15px;
-  left: 145px;
+  left: -15px;
   transform: none;
 }
 
 .vertical-alignment[data-name]::before {
   width: 75px;
   height: 15px;
-  left: 205px;
+  left: -15px;
   transform: none;
 }
 
@@ -223,6 +225,7 @@
   z-index: 1000;
   padding: 0px;
   margin: 0;
+  overflow: visible;
 }
 
 .text-size.active .size-dropdown {
