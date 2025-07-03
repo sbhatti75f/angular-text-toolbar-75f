@@ -14,7 +14,7 @@
 }
 
 .svg-default.active {
-  color: var(--Primary);
+  color: rgba(229, 86, 26, 1);
 }
 
 .hidden {

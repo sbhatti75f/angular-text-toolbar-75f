@@ -12,7 +12,7 @@
     </div>
 
 <div id="editor-container">
-    <div class="action-bar">
+    <div class="action-bar" #actionBar>
     
     <div class = "text-size-wrapper">
         <div class="text-size" data-name="Text Size">
@@ -297,9 +297,9 @@
 
     <div class="linking" data-name="Insert Link">
         <div class="svg-default">
-        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="32" viewBox="0 0 44 32" fill="none">
-        <path d="M24.2568 13.7435C26.1663 15.655 26.1401 18.7196 24.2683 20.6018C24.2648 20.6057 24.2606 20.6098 24.2568 20.6137L22.1091 22.7614C20.2148 24.6557 17.1329 24.6554 15.2389 22.7614C13.3446 20.8674 13.3446 17.7852 15.2389 15.8912L16.4248 14.7053C16.7393 14.3908 17.2809 14.5998 17.2972 15.0443C17.3179 15.6107 17.4194 16.1797 17.6068 16.7293C17.6703 16.9153 17.625 17.1211 17.4859 17.2602L17.0677 17.6784C16.172 18.5742 16.1439 20.0326 17.0308 20.9371C17.9264 21.8505 19.3986 21.8559 20.3011 20.9534L22.4488 18.806C23.3498 17.905 23.346 16.4487 22.4488 15.5515C22.3305 15.4334 22.2114 15.3417 22.1183 15.2776C22.0525 15.2324 21.9981 15.1724 21.9596 15.1025C21.921 15.0325 21.8993 14.9545 21.8963 14.8747C21.8836 14.537 22.0033 14.189 22.2702 13.9221L22.943 13.2492C23.1195 13.0728 23.3963 13.0511 23.6009 13.1939C23.8352 13.3575 24.0547 13.5414 24.2568 13.7435ZM28.7611 9.23897C26.8671 7.34495 23.7852 7.34469 21.8909 9.23897L19.7432 11.3867C19.7394 11.3905 19.7352 11.3947 19.7317 11.3985C17.8599 13.2807 17.8337 16.3453 19.7432 18.2569C19.9453 18.4589 20.1648 18.6428 20.3991 18.8064C20.6037 18.9492 20.8805 18.9275 21.0569 18.7511L21.7298 18.0782C21.9967 17.8113 22.1164 17.4633 22.1037 17.1256C22.1006 17.0458 22.079 16.9678 22.0404 16.8978C22.0019 16.8279 21.9475 16.7679 21.8817 16.7227C21.7886 16.6586 21.6695 16.5669 21.5512 16.4488C20.654 15.5516 20.6502 14.0953 21.5512 13.1943L23.6989 11.0469C24.6014 10.1444 26.0735 10.1498 26.9692 11.0632C27.8561 11.9677 27.8281 13.4262 26.9323 14.3219L26.514 14.7401C26.375 14.8792 26.3297 15.085 26.3931 15.2711C26.5806 15.8206 26.6821 16.3896 26.7028 16.956C26.7191 17.4005 27.2607 17.6095 27.5752 17.295L28.7611 16.1091C30.6554 14.2152 30.6554 11.1329 28.7611 9.23897Z" fill="#B6B6B6"/>
-    </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="32" viewBox="0 0 44 32" fill="none">
+                <path d="M24.2568 13.7435C26.1663 15.655 26.1401 18.7196 24.2683 20.6018C24.2648 20.6057 24.2606 20.6098 24.2568 20.6137L22.1091 22.7614C20.2148 24.6557 17.1329 24.6554 15.2389 22.7614C13.3446 20.8674 13.3446 17.7852 15.2389 15.8912L16.4248 14.7053C16.7393 14.3908 17.2809 14.5998 17.2972 15.0443C17.3179 15.6107 17.4194 16.1797 17.6068 16.7293C17.6703 16.9153 17.625 17.1211 17.4859 17.2602L17.0677 17.6784C16.172 18.5742 16.1439 20.0326 17.0308 20.9371C17.9264 21.8505 19.3986 21.8559 20.3011 20.9534L22.4488 18.806C23.3498 17.905 23.346 16.4487 22.4488 15.5515C22.3305 15.4334 22.2114 15.3417 22.1183 15.2776C22.0525 15.2324 21.9981 15.1724 21.9596 15.1025C21.921 15.0325 21.8993 14.9545 21.8963 14.8747C21.8836 14.537 22.0033 14.189 22.2702 13.9221L22.943 13.2492C23.1195 13.0728 23.3963 13.0511 23.6009 13.1939C23.8352 13.3575 24.0547 13.5414 24.2568 13.7435ZM28.7611 9.23897C26.8671 7.34495 23.7852 7.34469 21.8909 9.23897L19.7432 11.3867C19.7394 11.3905 19.7352 11.3947 19.7317 11.3985C17.8599 13.2807 17.8337 16.3453 19.7432 18.2569C19.9453 18.4589 20.1648 18.6428 20.3991 18.8064C20.6037 18.9492 20.8805 18.9275 21.0569 18.7511L21.7298 18.0782C21.9967 17.8113 22.1164 17.4633 22.1037 17.1256C22.1006 17.0458 22.079 16.9678 22.0404 16.8978C22.0019 16.8279 21.9475 16.7679 21.8817 16.7227C21.7886 16.6586 21.6695 16.5669 21.5512 16.4488C20.654 15.5516 20.6502 14.0953 21.5512 13.1943L23.6989 11.0469C24.6014 10.1444 26.0735 10.1498 26.9692 11.0632C27.8561 11.9677 27.8281 13.4262 26.9323 14.3219L26.514 14.7401C26.375 14.8792 26.3297 15.085 26.3931 15.2711C26.5806 15.8206 26.6821 16.3896 26.7028 16.956C26.7191 17.4005 27.2607 17.6095 27.5752 17.295L28.7611 16.1091C30.6554 14.2152 30.6554 11.1329 28.7611 9.23897Z" fill="currentColor"/>
+            </svg>
         </div>
     </div>
 
@@ -346,3 +346,376 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+
+
+
+<ul id="context-menu" #contextMenu class="hidden">
+    <li (click)="addImage()">Add Image</li>
+    <li (click)="addText()">Add Text</li>
+</ul>
+
+    Editor Section (hidden by default) 
+<div id="editor-wrapper" #editorWrapper class="hidden">
+    <div class="top-buttons">
+    <button class = "cancel" (click)="discardChanges()">DISCARD CHANGES</button>
+    <button class = "save" (click)="saveChanges()">SAVE SITE DASHBOARD</button>
+    </div>
+
+<div id="editor-container">
+    <div class="action-bar">
+    
+    <div class = "text-size-wrapper">
+        <div class="text-size" data-name="Text Size">
+             Default visible icon 
+            <div class="svg-default">
+                <svg id xmlns="http://www.w3.org/2000/svg" width="60" height="32" viewBox="0 0 60 32" fill="none">
+                    <path d="" fill="currentColor" />
+                    <path d="" fill="currentColor" />
+                </svg>
+            </div>
+                
+            <div class="size-dropdown">
+
+             Large size option 
+            <div class="size-option" data-size="large">
+                <svg class = "svg-default" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect width="32" height="32" rx="2" fill="none"/>
+                <path d="" fill="currentColor" />
+                </svg>
+
+                <template class="replacement-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="32" viewBox="0 0 60 32" fill="none">
+                        <path d="" fill="currentColor" />
+                        <path d="" fill="currentColor" />
+                    </svg>
+                </template>
+            </div>
+
+            
+               Medium size option 
+            <div class="size-option" data-size="medium">
+                <svg class = "svg-default" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="" fill="currentColor" />
+                </svg>
+
+                <template class="replacement-icon">
+                    <svg id xmlns="http://www.w3.org/2000/svg" width="60" height="32" viewBox="0 0 60 32" fill="none">
+                    <path d="" fill="currentColor" />
+                    <path d="" fill="currentColor" />
+                    </svg>
+                </template>
+            </div>
+            
+            
+
+                Small size option 
+            <div class="size-option" data-size="small">
+                <svg class = "svg-default" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="" fill="currentColor" />
+                </svg>
+
+                <template class="replacement-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path d="" fill="currentColor" />
+                </svg>
+                </template>
+            </div>
+            </div>
+        
+        </div>
+    </div>
+
+
+    <div class="bold" data-name="bold">
+        <div class="svg-default">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="32" viewBox="0 0 36 32" fill="none">
+            <path d="" fill="currentColor"/>
+        </svg>
+        </div>
+    </div>
+
+
+    <svg id = "dash1" xmlns="http://www.w3.org/2000/svg" width="1" height="12" viewBox="0 0 1 12" fill="none">
+        <rect width="1" height="12" fill="#CCCCCC"/>
+    </svg>
+    
+
+    <div class="italic" data-name="italic">
+        <div class="svg-default">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="32" viewBox="0 0 36 32" fill="none">
+            <path d="" fill="currentColor"/>
+        </svg>
+        </div>
+    </div>
+
+    <svg id = "dash2" xmlns="http://www.w3.org/2000/svg" width="1" height="12" viewBox="0 0 1 12" fill="none">
+        <rect width="1" height="12" fill="#CCCCCC"/>
+    </svg>
+    
+
+
+    <div class="alignment-wrapper">
+        <div class="alignment" data-name="Horizontal Align">
+                Visible current icon
+            <div class="svg-default">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="32" viewBox="0 0 60 32" fill="none">
+                <path d="" fill="currentColor"/>
+                <path d="" fill="currentColor"/>
+                <path d="" fill="currentColor"/>
+                <path d="" fill="currentColor"/>
+                <path d="" fill="currentColor"/>
+                </svg>
+            </div>
+
+             Dropdown
+            <div class="alignment-dropdown">
+            
+                Left Align Option 
+            <div class="align-option" data-align="left">
+                <svg class = "svg-default" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path d="" fill="currentColor"/>
+                <path d="" fill="currentColor"/>
+                <path d="" fill="currentColor"/>
+                <path d="" fill="currentColor"/>
+                </svg>
+                <template class="replacement-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="60" height="32" viewBox="0 0 60 32" fill="none">
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    </svg>
+                </template>
+            </div>
+
+               Center Align Option 
+            <div class="align-option" data-align="center">
+                <svg class = "svg-default" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path d="" fill="currentColor"/>
+                <path d="" fill="currentColor"/>
+                <path d="" fill="currentColor"/>
+                <path d="" fill="currentColor"/>
+                </svg>
+                <template class="replacement-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="32" viewBox="0 0 60 32" fill="none">
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                </svg>
+                </template>
+            </div>
+
+                Right Align Option 
+            <div class="align-option" data-align="right">
+                <svg class = "svg-default" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <path d="" fill="currentColor"/>
+                <path d="" fill="currentColor"/>
+                <path d="" fill="currentColor"/>
+                <path d="" fill="currentColor"/>
+                </svg>
+                <template class="replacement-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="32" viewBox="0 0 60 32" fill="none">
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                </svg>
+                </template>
+            </div>
+
+            </div>
+        </div>
+        </div>
+
+
+    <svg id = "dash3" xmlns="http://www.w3.org/2000/svg" width="1" height="12" viewBox="0 0 1 12" fill="none">
+        <rect width="1" height="12" fill="#CCCCCC"/>
+    </svg>
+
+    
+
+
+
+    <div class="vertical-alignment-wrapper">
+        <div class="vertical-alignment" data-name="Vertical Align">
+             Current visible icon 
+            <div class="svg-default">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="32" viewBox="0 0 60 32" fill="none">
+                <rect width="60" height="32" fill="none"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                </svg>
+            </div>
+
+             Dropdown options 
+            <div class="vertical-align-dropdown">
+             Top Align Option 
+            <div class="v-align-option" data-valign="top">
+                <svg class = "svg-default" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                </svg>
+                <template class="replacement-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="32" viewBox="0 0 60 32" fill="none">
+                <rect width="60" height="32" fill="none"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                </svg>
+                </template>
+            </div>
+
+                Middle Align Option
+            <div class="v-align-option" data-valign="middle">
+                <svg class = "svg-default" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor" />
+                </svg>
+                <template class="replacement-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="32" viewBox="0 0 60 32" fill="none">
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                </svg>
+                </template>
+            </div>
+            
+                Bottom Align Option 
+            <div class="v-align-option" data-valign="bottom">
+                <svg class = "svg-default" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                </svg>
+                <template class="replacement-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="32" viewBox="0 0 60 32" fill="none">
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                    <path d="" fill="currentColor"/>
+                </svg>
+                </template>
+            </div>
+            </div>
+        </div>
+        </div>
+
+
+    <svg id = "dash4" xmlns="http://www.w3.org/2000/svg" width="1" height="12" viewBox="0 0 1 12" fill="none">
+        <rect width="1" height="12" fill="#CCCCCC"/>
+    </svg>
+
+
+    <div class="text-color" data-name="Text Color">
+        <div class="svg-default">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="32" viewBox="0 0 36 32" fill="none">
+            <path d="" fill="currentColor"/>
+            <path d="" fill="currentColor"/>
+        </svg>
+        </div>
+    </div>
+
+    <div class="backcolor" data-name="Fill Color">
+        <div class="svg-default">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" viewBox="0 0 40 32" fill="none">
+            <rect width="40" height="32" rx="2" fill="none"/>
+            <path d="" fill="currentColor"/>
+            <path d="" fill="currentColor"/>
+        </svg>
+        </div>
+    </div>
+
+    <div class="border-fill" data-name="Border Color">
+        <div class="svg-default">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" viewBox="0 0 40 32" fill="none">
+            <path d="" fill="currentColor"/>
+            <path d="" fill="currentColor"/>
+            <path d="" fill="currentColor"/>
+        </svg>
+        </div>
+    </div>
+
+    <svg id = "dash5" xmlns="http://www.w3.org/2000/svg" width="1" height="12" viewBox="0 0 1 12" fill="none">
+        <rect width="1" height="12" fill="#CCCCCC"/>
+    </svg>
+
+
+    <div class="linking" data-name="Insert Link">
+        <div class="svg-default">
+        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="32" viewBox="0 0 44 32" fill="none">
+        <path d="" fill=""/>
+    </svg>
+        </div>
+    </div>
+
+    <svg id = "dash6" xmlns="http://www.w3.org/2000/svg" width="1" height="12" viewBox="0 0 1 12" fill="none">
+        <rect width="1" height="12" fill="#CCCCCC"/>
+    </svg>
+
+    <div class="deleting" data-name="Delete">
+        <div class="svg-default">
+        <svg id xmlns="http://www.w3.org/2000/svg" width="44" height="32" viewBox="0 0 44 32" fill="none">
+            <rect width="44" height="32" rx="2" fill="none"/>
+            <path d="" fill="currentColor"/>
+        </svg>
+        </div>
+    </div>
+
+    </div>
+
+    <div class="text-area-container" #textAreaContainer>
+    <svg class = "handle" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d=""
+        fill="#E5561A" fill-opacity="0.5"/>
+    </svg>
+
+    <div class="editable-div" #editableDiv contenteditable="true" [attr.data-placeholder]="'Type your text here'"></div>
+
+    <svg #resizer class = "resizer" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <g clip-path="url(#clip0_2118_218195)">
+        <mask id="mask0_2118_218195" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
+        <rect width="16" height="16" fill="#D9D9D9"/>
+        </mask>
+        <g mask="url(#mask0_2118_218195)">
+        <path d=""  fill="#E5561A" fill-opacity="0.5"/>
+        </g>
+        </g>
+        <defs>
+        <clipPath id="clip0_2118_218195">
+        <rect width="16" height="16" fill="white"/>
+        </clipPath>
+        </defs>
+    </svg>
+    </div>
+</div>
+
+
+
+-->

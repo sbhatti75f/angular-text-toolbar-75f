@@ -3,7 +3,7 @@ import {
   Component,
   ElementRef,
   Renderer2,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 
 @Component({
@@ -18,12 +18,14 @@ export class EditorComponent implements AfterViewInit {
   @ViewChild('textAreaContainer') container!: ElementRef;
   @ViewChild('editableDiv') editableDiv!: ElementRef;
   @ViewChild('resizer') resizer!: ElementRef;
+  @ViewChild('actionBar') actionBar!: ElementRef; 
 
   private isResizing = false;
   private startX = 0;
   private startY = 0;
   private startWidth = 0;
   private startHeight = 0;
+  private readonly STORAGE_KEY = 'editor_saved_data';
 
   isBoldActive = false;
   isItalicActive = false;
@@ -39,9 +41,23 @@ export class EditorComponent implements AfterViewInit {
     this.setupBlurCleaner();
   }
 
-  // Context Menu
   private setupContextMenu(): void {
     this.renderer.listen('document', 'contextmenu', (e: MouseEvent) => {
+      // Check if click is inside action bar or text area container
+      const actionBar = this.actionBar?.nativeElement;
+      const textAreaContainer = this.container?.nativeElement;
+      
+      if (actionBar && actionBar.contains(e.target)) {
+        e.preventDefault();
+        return;
+      }
+      
+      if (textAreaContainer && textAreaContainer.contains(e.target)) {
+        e.preventDefault();
+        return;
+      }
+
+      // Only show context menu for clicks outside restricted areas
       e.preventDefault();
       const menu = this.contextMenu.nativeElement;
       menu.style.top = `${e.clientY}px`;
@@ -65,11 +81,32 @@ export class EditorComponent implements AfterViewInit {
   }
 
   saveChanges(): void {
-    alert('Mock: Save to Dashboard');
+    const editorData = {
+      content: this.editableDiv.nativeElement.innerHTML,
+      styles: {
+        fontSize: this.editableDiv.nativeElement.style.fontSize,
+        fontWeight: this.editableDiv.nativeElement.style.fontWeight,
+        fontStyle: this.editableDiv.nativeElement.style.fontStyle,
+        textAlign: this.editableDiv.nativeElement.style.textAlign,
+        verticalAlign: this.editableDiv.nativeElement.style.verticalAlign
+      },
+      dimensions: {
+        width: this.container.nativeElement.style.width,
+        height: this.container.nativeElement.style.height
+      }
+    };
+
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(editorData));
+    alert('Editor content saved to local storage!');
   }
 
   discardChanges(): void {
-    this.editorWrapper.nativeElement.classList.add('hidden');
+    if (confirm('Are you sure you want to discard all changes?')) {
+      localStorage.removeItem(this.STORAGE_KEY);
+      this.editableDiv.nativeElement.innerHTML = '';
+      this.editorWrapper.nativeElement.classList.add('hidden');
+      alert('Changes discarded and editor cleared.');
+    }
   }
 
   // Resizer Logic
@@ -221,7 +258,8 @@ export class EditorComponent implements AfterViewInit {
         });
       });
     }
-      // Vertical alignment
+
+    // Vertical alignment
     const vAlignControl = document.querySelector('.vertical-alignment') as HTMLElement;
     const currentVAlignIcon = vAlignControl?.querySelector('.svg-default');
     const vAlignOptions = document.querySelectorAll('.v-align-option');
