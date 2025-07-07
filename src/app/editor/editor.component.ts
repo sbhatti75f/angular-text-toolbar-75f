@@ -33,6 +33,7 @@ export class EditorComponent implements AfterViewInit {
   constructor(private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
+    this.setupSvgClickToggles();
     this.setupContextMenu();
     this.setupResizable();
     this.setupDropdowns();
@@ -40,6 +41,17 @@ export class EditorComponent implements AfterViewInit {
     this.setupDeleteHandler();
     this.setupBlurCleaner();
   }
+
+  //For changing the color of the svg when clicked
+  private setupSvgClickToggles(): void {
+    const icons = document.querySelectorAll('.svg-default');
+    icons.forEach(icon => {
+      this.renderer.listen(icon, 'click', () => {
+        icon.classList.toggle('active');
+      });
+    });
+  }
+
 
   private setupContextMenu(): void {
     this.renderer.listen('document', 'contextmenu', (e: MouseEvent) => {

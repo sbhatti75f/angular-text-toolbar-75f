@@ -8,13 +8,13 @@
   transition: color 0.3s ease;
 }
 
+.svg-default.active {
+  color: rgba(229, 86, 26, 1);
+}
+
 .svg-default:hover{
     background-color: rgba(229, 86, 26, 0.1);
     color: rgba(229, 86, 26, 1);
-}
-
-.svg-default.active {
-  color: rgba(229, 86, 26, 1);
 }
 
 .hidden {
@@ -521,8 +521,11 @@
     width: 1px;
 }
 
+/************Exception of color for Linking*****************/
+
 .linking .svg-default{
     position: absolute;
+    color: rgba(182, 182, 182, 1);
     top: 4px;
     bottom: 4px;
     height: 32px;
@@ -530,7 +533,18 @@
     cursor: pointer;
     display: inline-block;
     left: 397px;
+    fill: currentColor;
 }
+
+.linking .svg-default:hover{
+  background-color: rgba(229, 86, 26, 0.1);
+  color: rgba(229, 86, 26, 1);
+}
+
+.linking .svg-default.active{
+  color: rgba(229, 86, 26, 1);
+}
+/****************************************/
 
 #dash6 {
     position: absolute;
