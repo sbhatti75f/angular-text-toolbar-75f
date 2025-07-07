@@ -99,11 +99,27 @@
   white-space: nowrap;
 }
 
-.text-size[data-name]::before {
+.text-size [data-name]::before {
   width: 55px;
   height: 15px;
   left: -5px;
   transform: none;
+}
+
+.size-dropdown [data-name]::before {
+  bottom: calc(100% - 75px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: auto;
+}
+
+.size-dropdown [data-name]:hover::before {
+  opacity: 1 !important;
+}
+
+.text-size:hover:has(.size-dropdown:hover)::before {
+  opacity: 0 !important;
 }
 
 
@@ -123,6 +139,7 @@
   transform: none;
 }
 
+/***************************************************/
 .alignment[data-name]::before {
   width: 80px;
   height: 15px;
@@ -130,12 +147,50 @@
   transform: none;
 }
 
+.alignment-dropdown [data-name]::before {
+  bottom: calc(100% - 75px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: auto;
+}
+
+.alignment-dropdown [data-name]:hover::before {
+  opacity: 1 !important;
+}
+
+.alignment:hover:has(.alignment-dropdown:hover)::before {
+  opacity: 0 !important;
+}
+
+/************************************************************************/
+
+
 .vertical-alignment[data-name]::before {
   width: 75px;
   height: 15px;
   left: -15px;
   transform: none;
 }
+
+.vertical-align-dropdown [data-name]::before {
+  bottom: calc(100% - 75px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: auto;
+}
+
+.vertical-align-dropdown [data-name]:hover::before {
+  opacity: 1 !important;
+}
+
+.vertical-alignment:hover:has(.vertical-align-dropdown:hover)::before {
+  opacity: 0 !important;
+}
+
+
+/************************************************************/
 
 .text-color[data-name]::before {
   width: 55px;
@@ -176,6 +231,7 @@
   opacity: 1;
 }
 
+/***************************************************************************/
 
 .action-bar {
     position: relative;
@@ -212,20 +268,19 @@
   display: inline-block;
 }
 
+
 .size-dropdown {
   position: absolute;
   top: 40px; /* Position below the action bar */
   left: 0px;
   width: 96px;
-  height: 32px;
   display: none;
   background: white;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  flex-direction: row;
   z-index: 1000;
-  padding: 0px;
-  margin: 0;
-  overflow: visible;
+  gap: 0;
 }
 
 .text-size.active .size-dropdown {
@@ -233,19 +288,15 @@
   gap: 0px;
 }
 
-
-.size-option {
+.size-option .svg-default{
   position: relative;
+  left: 0px;
   width: 32px;
   height: 32px;
-  cursor: pointer;
-  overflow: hidden;      /* <-- prevent hover leakage */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;   
+  cursor: pointer;  
 }
 
+/*********************************************************/
 
 #dash1  {
     position: absolute;
