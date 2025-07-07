@@ -456,6 +456,15 @@
   cursor: pointer; 
 }
 
+/** For Dropdowns to have higher priority than textAreaContainer **/
+.size-dropdown,
+.alignment-dropdown,
+.vertical-align-dropdown {
+  position: absolute;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
 /***********************************************************/
 
 #dash4  {
@@ -609,18 +618,9 @@
 }
 
 .text-area-container > div {
-  width: auto; /* Changed from 100% */
+  width: auto; 
   height: 100%;
   padding: 2px;
   box-sizing: border-box;
 }
 
-
-
-.size-dropdown,
-.alignment-dropdown,
-.vertical-align-dropdown {
-  position: absolute;
-  z-index: 9999;
-  pointer-events: auto;
-}
