@@ -189,36 +189,62 @@
                 <use xlink:href="assets/icons.svg#dash-icon"></use>
             </svg>
 
+
+            <!--*****************************************************-->
+            <!-- Text Color SVG + Input -->
             <div class="text-color" data-name="Text Color">
-                <div class="svg-default">
-                    <svg width="36" height="32">
-                        <use xlink:href="assets/icons.svg#text-color-icon"></use>
-                    </svg>
-                </div>
+              <div class="svg-default" (click)="handleColorIconClick('text')">
+                <svg #textColorIcon width="36" height="32">
+                  <use xlink:href="assets/icons.svg#text-color-icon"></use>
+                </svg>
+              </div>
             </div>
+            <input
+              *ngIf="showTextColorInput"
+              type="color"
+              [(ngModel)]="selectedColor"
+              (change)="applyTextColor()"
+              class="text-color-input" />
 
+            <!-- Background Fill SVG + Input -->
             <div class="backcolor" data-name="Fill Color">
-                <div class="svg-default">
-                    <svg width="40" height="32">
-                        <use xlink:href="assets/icons.svg#backcolor-icon"></use>
-                    </svg>
-                </div>
+              <div class="svg-default" (click)="handleColorIconClick('background')">
+                <svg width="40" height="32">
+                  <use xlink:href="assets/icons.svg#backcolor-icon"></use>
+                </svg>
+              </div>
             </div>
+            <input
+              *ngIf="showBackColorInput"
+              type="color"
+              [(ngModel)]="selectedColor"
+              (change)="applyBackgroundColor()"
+              class="body-color-input" />
 
+            <!-- Border Fill SVG + Input -->
             <div class="border-fill" data-name="Border Color">
-                <div class="svg-default">
-                    <svg width="40" height="32">
-                        <use xlink:href="assets/icons.svg#border-fill-icon"></use>
-                    </svg>
-                </div>
+              <div class="svg-default" (click)="handleColorIconClick('border')">
+                <svg width="40" height="32">
+                  <use xlink:href="assets/icons.svg#border-fill-icon"></use>
+                </svg>
+              </div>
             </div>
+            <input
+              *ngIf="showBorderColorInput"
+              type="color"
+              [(ngModel)]="selectedColor"
+              (change)="applyBorderColor()"
+              class="border-color-input" />
+
+
+            <!--*****************************************************-->
 
             <svg id="dash5" width="1" height="12">
                 <use xlink:href="assets/icons.svg#dash-icon"></use>
             </svg>
 
             <div class="linking" data-name="Insert Link">
-                <div class="svg-default">
+                <div class="svg-default" (click)="insertLink()">
                     <svg width="44" height="32">
                         <use xlink:href="assets/icons.svg#link-icon"></use>
                     </svg>

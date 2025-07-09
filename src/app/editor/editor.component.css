@@ -638,3 +638,34 @@
   box-sizing: border-box;
 }
 
+.text-color-input {
+  position: absolute;
+  top: 50px;
+  cursor: pointer;
+  left: 280px;
+  display: block;
+}
+
+.body-color-input{
+  position: absolute;
+  top: 50px;
+  cursor: pointer;
+  display: block;
+  left: 316px;
+}
+
+.border-color-input{
+  position: absolute;
+  top: 50px;
+  cursor: pointer;
+  display: block;
+  left: 356px;
+}
+
+.editable-div a {
+  color: inherit;           
+  text-decoration: underline;
+  cursor: pointer;          
+}
+
+

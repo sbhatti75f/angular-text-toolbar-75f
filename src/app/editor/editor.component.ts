@@ -19,6 +19,7 @@ export class EditorComponent implements AfterViewInit {
   @ViewChild('editableDiv') editableDiv!: ElementRef;
   @ViewChild('resizer') resizer!: ElementRef;
   @ViewChild('actionBar') actionBar!: ElementRef; 
+  @ViewChild('textColorIcon') textColorIcon!: ElementRef<SVGSVGElement>;
 
   private isResizing = false;
   private startX = 0;
@@ -26,6 +27,11 @@ export class EditorComponent implements AfterViewInit {
   private startWidth = 0;
   private startHeight = 0;
   private readonly STORAGE_KEY = 'editor_saved_data';
+  showTextColorInput: boolean = false;
+  showBackColorInput: boolean = false;
+  showBorderColorInput: boolean = false;
+  selectedColor: string = '#000000';
+  private savedSelection: Range | null = null;
 
   isBoldActive = false;
   isItalicActive = false;
@@ -40,17 +46,113 @@ export class EditorComponent implements AfterViewInit {
     this.setupStyleButtons();
     this.setupDeleteHandler();
     this.setupBlurCleaner();
+
+    this.renderer.listen(this.editableDiv.nativeElement, 'mouseup', () => {
+      this.saveSelection();
+    });
+    this.renderer.listen(this.editableDiv.nativeElement, 'keyup', () => {
+      this.saveSelection();
+    });
+
+    this.renderer.listen('document', 'click', (event: MouseEvent) => {
+      const clickedEl = event.target as HTMLElement;
+      if (
+        !clickedEl.closest('.text-color') &&
+        !clickedEl.closest('.text-color-input') &&
+        !clickedEl.closest('.backcolor') &&
+        !clickedEl.closest('.body-color-input') &&
+        !clickedEl.closest('.border-fill') &&
+        !clickedEl.closest('.border-color-input')
+      ) {
+        this.showTextColorInput = false;
+        this.showBackColorInput = false;
+        this.showBorderColorInput = false;
+      }
+    });
+
+    this.renderer.listen(this.editableDiv.nativeElement, 'click', (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (target.tagName === 'A') {
+        event.preventDefault();
+        const url = (target as HTMLAnchorElement).href;
+        window.open(url, '_blank');
+      }
+    });
+
   }
 
-  //For changing the color of the svg when clicked
+  private saveSelection(): void {
+      const selection = window.getSelection();
+      if (selection && selection.rangeCount > 0) {
+        this.savedSelection = selection.getRangeAt(0);
+      }
+    }
+
+    private restoreSelection(): void {
+      if (this.savedSelection) {
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(this.savedSelection);
+      }
+    }
+
+  handleColorIconClick(type: 'text' | 'background' | 'border') {
+    this.showTextColorInput = type === 'text' ? !this.showTextColorInput : false;
+    this.showBackColorInput = type === 'background' ? !this.showBackColorInput : false;
+    this.showBorderColorInput = type === 'border' ? !this.showBorderColorInput : false;
+  }
+
   private setupSvgClickToggles(): void {
     const icons = document.querySelectorAll('.svg-default');
     icons.forEach(icon => {
-      this.renderer.listen(icon, 'click', () => {
+      this.renderer.listen(icon, 'click', (e: Event) => {
         icon.classList.toggle('active');
       });
     });
   }
+
+  applyTextColor(): void {
+    this.restoreSelection();
+    const editable = this.editableDiv.nativeElement;
+    editable.focus();
+
+    const selection = window.getSelection();
+    if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
+      document.execCommand('styleWithCSS', false, 'true');
+      document.execCommand('foreColor', false, this.selectedColor);
+    } else {
+      const range = selection.getRangeAt(0);
+      const span = document.createElement('span');
+      span.style.color = this.selectedColor;
+      span.appendChild(range.extractContents());
+      range.deleteContents();
+      range.insertNode(span);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+
+    const iconSvg = this.textColorIcon.nativeElement;
+    const useTag = iconSvg.querySelector('use');
+    if (useTag) {
+      iconSvg.style.fill = this.selectedColor;
+      useTag.setAttribute('fill', this.selectedColor);
+    }
+
+    const dashes = document.querySelectorAll('svg[id^="dash"] use');
+    dashes.forEach((useEl) => {
+      (useEl as SVGUseElement).setAttribute('fill', this.selectedColor);
+    });
+  }
+
+  applyBackgroundColor(): void {
+    this.editableDiv.nativeElement.style.backgroundColor = this.selectedColor;
+  }
+
+  applyBorderColor(): void {
+    this.editableDiv.nativeElement.style.border = `2px solid ${this.selectedColor}`;
+  }
+
+
 
 
   private setupContextMenu(): void {
@@ -153,6 +255,7 @@ export class EditorComponent implements AfterViewInit {
 
   // Text style buttons (bold/italic)
   private setupStyleButtons(): void {
+    this.restoreSelection();
     const editable = this.editableDiv.nativeElement;
 
     const boldButton = document.querySelector('.bold') as HTMLElement;
@@ -180,6 +283,7 @@ export class EditorComponent implements AfterViewInit {
   }
 
   private applyTextStyle(styleProperty: string, styleValue: string): void {
+    this.restoreSelection();
     const editable = this.editableDiv.nativeElement;
     editable.focus();
 
@@ -302,6 +406,41 @@ export class EditorComponent implements AfterViewInit {
       });
     }
   }
+
+  //Link 
+  insertLink(): void {
+    this.restoreSelection();
+    const selection = window.getSelection();
+
+    if (!selection || selection.rangeCount === 0 || selection.isCollapsed) {
+      alert('Please select the text you want to link.');
+      return;
+    }
+
+    const url = prompt('Enter the URL to link to:');
+    if (!url) return;
+
+    const range = selection.getRangeAt(0);
+    const anchor = document.createElement('a');
+    anchor.href = url.startsWith('http') ? url : 'https://' + url;
+    anchor.target = '_blank';
+    anchor.rel = 'noopener noreferrer';
+    anchor.style.textDecoration = 'underline';
+
+    anchor.textContent = range.toString(); // preserve original text
+
+    // Replace selected text with the anchor element
+    range.deleteContents();
+    range.insertNode(anchor);
+
+    // Collapse selection after inserted link
+    selection.removeAllRanges();
+    const newRange = document.createRange();
+    newRange.setStartAfter(anchor);
+    newRange.collapse(true);
+    selection.addRange(newRange);
+  }
+
 
   // Delete Button
   private setupDeleteHandler(): void {
