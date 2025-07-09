@@ -79,6 +79,27 @@ export class EditorComponent implements AfterViewInit {
       }
     });
 
+
+    // Character Limit of 500
+    this.renderer.listen(this.editableDiv.nativeElement, 'input', () => {
+      const editable = this.editableDiv.nativeElement;
+      const text = editable.innerText || '';
+
+      if (text.length > 500) {
+        // Trim the text to 500 characters
+        editable.innerText = text.substring(0, 500);
+
+        // Restore cursor position at the end
+        const range = document.createRange();
+        const sel = window.getSelection();
+        range.selectNodeContents(editable);
+        range.collapse(false);
+        sel?.removeAllRanges();
+        sel?.addRange(range);
+
+        alert('Character limit of 500 reached!');
+      }
+    });
   }
 
   private saveSelection(): void {
@@ -469,10 +490,73 @@ export class EditorComponent implements AfterViewInit {
   // Delete Button
   private setupDeleteHandler(): void {
     const deleteButton = document.querySelector('.deleting');
+
     this.renderer.listen(deleteButton, 'click', () => {
-      this.editableDiv.nativeElement.innerHTML = '';
+      const editable = this.editableDiv.nativeElement;
+
+      //  Clear content
+      editable.innerHTML = '';
+
+      //  Reset inline styles
+      editable.removeAttribute('style');
+
+      //  Reset selected color
+      this.selectedColor = '#000000';
+
+      //  Reset bold/italic button states (functionally and visually)
+      this.isBoldActive = false;
+      this.isItalicActive = false;
+
+      const boldBtn = document.querySelector('.bold');
+      const italicBtn = document.querySelector('.italic');
+      boldBtn?.classList.remove('active');
+      italicBtn?.classList.remove('active');
+
+      //  Reset horizontal alignment icon
+      const alignControl = document.querySelector('.alignment') as HTMLElement;
+      const alignIcon = alignControl?.querySelector('.svg-default');
+      alignControl?.classList.remove('active');
+      if (alignIcon) {
+        alignIcon.innerHTML = `
+          <svg width="60" height="32">
+            <use xlink:href="assets/icons.svg#align-default"></use>
+          </svg>
+        `;
+      }
+
+      // Reset vertical alignment icon
+      const vAlignControl = document.querySelector('.vertical-alignment') as HTMLElement;
+      const vAlignIcon = vAlignControl?.querySelector('.svg-default');
+      vAlignControl?.classList.remove('active');
+      if (vAlignIcon) {
+        vAlignIcon.innerHTML = `
+          <svg width="60" height="32">
+            <use xlink:href="assets/icons.svg#valign-default"></use>
+          </svg>
+        `;
+      }
+
+      const textSizeControl = document.querySelector('.text-size') as HTMLElement;
+      const sizeIcon = textSizeControl?.querySelector('.svg-default');
+      textSizeControl?.classList.remove('active');
+      if (sizeIcon) {
+        sizeIcon.innerHTML = `
+          <svg width="60" height="32">
+              <use xlink:href="assets/icons.svg#text-size-default"></use>
+          </svg>
+        `;
+      }
+
+      document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+
+      const colorIcons = document.querySelectorAll('svg use');
+      colorIcons.forEach((useEl) => {
+        (useEl as SVGUseElement).setAttribute('fill', '#000000');
+      });
+
     });
   }
+
 
   // Clean up empty spans
   private setupBlurCleaner(): void {
