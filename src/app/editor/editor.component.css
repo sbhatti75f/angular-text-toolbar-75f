@@ -648,6 +648,7 @@
   cursor: pointer;
   left: 280px;
   display: block;
+  z-index: 10000;
 }
 
 .body-color-input{
@@ -656,6 +657,7 @@
   cursor: pointer;
   display: block;
   left: 316px;
+  z-index: 10000;
 }
 
 .border-color-input{
@@ -664,6 +666,7 @@
   cursor: pointer;
   display: block;
   left: 356px;
+  z-index: 10000;
 }
 
 .editable-div a {
