@@ -364,16 +364,28 @@ export class EditorComponent implements AfterViewInit {
           e.stopPropagation();
           const alignType = option.getAttribute('data-align');
           const replacement = option.querySelector('.replacement-icon');
+
           if (replacement && currentAlignIcon) {
             currentAlignIcon.innerHTML = replacement.innerHTML;
           }
+
           if (this.editableDiv?.nativeElement && alignType) {
-            this.editableDiv.nativeElement.style.textAlign = alignType;
+            const alignMap: any = {
+              left: 'flex-start',
+              center: 'center',
+              right: 'flex-end'
+            };
+
+            const editable = this.editableDiv.nativeElement;
+            editable.style.display = 'flex';
+            editable.style.alignItems = alignMap[alignType];
           }
+
           alignmentControl.classList.remove('active');
         });
       });
     }
+
 
     // Vertical alignment
     const vAlignControl = document.querySelector('.vertical-alignment') as HTMLElement;
@@ -395,12 +407,24 @@ export class EditorComponent implements AfterViewInit {
           e.stopPropagation();
           const valignType = option.getAttribute('data-valign');
           const replacement = option.querySelector('.replacement-icon');
+
           if (replacement && currentVAlignIcon) {
             currentVAlignIcon.innerHTML = replacement.innerHTML;
           }
+
           if (this.editableDiv?.nativeElement && valignType) {
-            this.editableDiv.nativeElement.style.verticalAlign = valignType;
+            const valignMap: any = {
+              top: 'flex-start',
+              middle: 'center',
+              bottom: 'flex-end'
+            };
+
+            const editable = this.editableDiv.nativeElement;
+            editable.style.display = 'flex';
+            editable.style.flexDirection = 'column';
+            editable.style.justifyContent = valignMap[valignType];
           }
+
           vAlignControl.classList.remove('active');
         });
       });
