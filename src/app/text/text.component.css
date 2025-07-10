@@ -1,0 +1,655 @@
+:root {
+  --Primary: rgba(229, 86, 26, 1);
+}
+
+.svg-default {
+  color: rgba(229, 86, 26, 0.5);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.svg-default.active {
+  color: rgba(229, 86, 26, 1);
+}
+
+.svg-default:hover{
+    background-color: rgba(229, 86, 26, 0.1);
+    color: rgba(229, 86, 26, 1);
+}
+
+
+.top-buttons {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 1000;
+}
+
+.top-buttons .save{
+  color: rgba(229, 86, 26, 1);
+  border-radius: 4px;
+  border: 2px solid rgba(229, 86, 26, 1);
+  height: 30px;
+  width: 180px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.top-buttons .cancel{
+  color: rgba(229, 86, 26, 1);
+  border-radius: 4px;
+  border: 2px solid rgba(229, 86, 26, 1);
+  height: 30px;
+  width: 160px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+/****************************Tooltip**********************************/
+
+[data-name] {
+  position: relative;
+}
+
+[data-name]::before {
+  content: attr(data-name);
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000;
+  color: #fff;
+  border-radius: 4px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  text-transform: capitalize;
+  z-index: 1000;
+  white-space: nowrap;
+}
+
+.text-size [data-name]::before {
+  width: 55px;
+  height: 15px;
+  left: -5px;
+  transform: none;
+}
+
+.size-dropdown [data-name]::before {
+  bottom: calc(100% - 75px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: auto;
+}
+
+.size-dropdown [data-name]:hover::before {
+  opacity: 1 !important;
+}
+
+.text-size:hover:has(.size-dropdown:hover)::before {
+  opacity: 0 !important;
+}
+
+
+/*************************************************************************/
+
+.bold[data-name]::before {
+  width: 35px;
+  height: 15px;
+  left: 75px;
+  transform: none;
+}
+
+.italic[data-name]::before {
+  width: 35px;
+  height: 15px;
+  left: 115px;
+  transform: none;
+}
+
+/***************************************************/
+.alignment[data-name]::before {
+  width: 80px;
+  height: 15px;
+  left: -15px;
+  transform: none;
+}
+
+.alignment-dropdown [data-name]::before {
+  bottom: calc(100% - 75px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: auto;
+}
+
+.alignment-dropdown [data-name]:hover::before {
+  opacity: 1 !important;
+}
+
+.alignment:hover:has(.alignment-dropdown:hover)::before {
+  opacity: 0 !important;
+}
+
+/************************************************************************/
+
+
+.vertical-alignment[data-name]::before {
+  width: 75px;
+  height: 15px;
+  left: -15px;
+  transform: none;
+}
+
+.vertical-align-dropdown [data-name]::before {
+  bottom: calc(100% - 75px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  height: auto;
+}
+
+.vertical-align-dropdown [data-name]:hover::before {
+  opacity: 1 !important;
+}
+
+.vertical-alignment:hover:has(.vertical-align-dropdown:hover)::before {
+  opacity: 0 !important;
+}
+
+
+/************************************************************/
+
+.text-color[data-name]::before {
+  width: 55px;
+  height: 15px;
+  left: 265px;
+  transform: none;
+}
+
+.backcolor[data-name]::before {
+  width: 45px;
+  height: 15px;
+  left: 305px;
+  transform: none;
+}
+
+.border-fill[data-name]::before {
+  width: 60px;
+  height: 15px;
+  left: 340px;
+  transform: none;
+}
+
+.linking[data-name]::before {
+  width: 60px;
+  height: 15px;
+  left: 380px;
+  transform: none;
+}
+
+.deleting[data-name]::before {
+  width: 35px;
+  height: 15px;
+  left: 438px;
+  transform: none;
+}
+
+[data-name]:hover::before {
+  opacity: 1;
+}
+
+/***************************************************************************/
+
+.action-bar {
+    position: relative;
+    width: 510px;
+    height: 40px;
+    top: 370px;
+    left: 76px;
+    border-radius: 200px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.24);
+    background: rgba(255, 255, 255, 1);
+}
+
+
+.text-size-wrapper {
+  position: absolute;
+  left: 24px;
+  top: 4px;
+  height: 32px;
+  width: 60px; 
+}
+
+.text-size {
+  position: relative; /* this allows dropdown to position itself within */
+  width: 60px;
+  height: 32px;
+}
+
+.text-size .svg-default {
+  width: 60px;
+  height: 32px;
+  left: 24px;
+  top: 4px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+
+.size-dropdown {
+  position: absolute;
+  top: 40px; /* Position below the action bar */
+  left: 0px;
+  width: 96px;
+  display: none;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  flex-direction: row;
+  z-index: 1000;
+  gap: 0;
+}
+
+.text-size.active .size-dropdown {
+  display: flex;
+  gap: 0px;
+}
+
+.size-option .svg-default{
+  position: relative;
+  left: 0px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;  
+}
+
+/*********************************************************/
+
+#dash1  {
+    position: absolute;
+    left: 84px;
+    top: 14px;
+    bottom: 14px;
+    height: 12px;
+    width: 1px;
+}
+
+.bold .svg-default {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    height: 32px;
+    width: 36px;
+    cursor: pointer;
+    display: inline-block;
+    left: 85px;
+}
+
+/* svg-swap2 ➝ italic */
+.italic .svg-default {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    height: 32px;
+    width: 36px;
+    cursor: pointer;
+    display: inline-block;
+    left: 121px;
+}
+
+#dash2  {
+    position: absolute;
+    left: 157px;
+    top: 14px;
+    bottom: 14px;
+    height: 12px;
+    width: 1px;
+}
+
+.alignment-wrapper {
+  position: absolute;
+  left: 158px;  /* This controls entire block position */
+  top: 4px;
+  height: 32px;
+  width: 60px;
+}
+
+.alignment {
+  position: relative;  /* Needed for dropdown to be relative */
+  width: 60px;
+  height: 32px;
+}
+
+.alignment .svg-default {
+  position: absolute;
+  top: 0;
+  left: 0;   
+  height: 32px;
+  width: 60px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.alignment-dropdown {
+  position: absolute;
+  top: 40px;  /* Push below the button */
+  left: 0;    /* Relative to `.alignment` */
+  width: 96px;
+  display: none;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  flex-direction: row;
+  gap: 0;
+}
+
+.alignment.active .alignment-dropdown {
+  display: flex;
+  gap:0;
+}
+
+.align-option .svg-default {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;  
+}
+
+
+/****************************************************/
+
+
+#dash3 {
+    position: absolute;
+    left: 218px;
+    top: 14px;
+    bottom: 14px;
+    height: 12px;
+    width: 1px;
+}
+
+
+/**********************************************************/
+
+.vertical-alignment-wrapper {
+  position: absolute;
+  left: 219px; /* Moved here */
+  top: 4px;
+  height: 32px;
+  width: 60px;
+}
+
+
+.vertical-alignment {
+  position: relative;  
+  width: 60px;
+  height: 32px;
+}
+
+.vertical-alignment .svg-default{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 32px;
+    width: 60px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.vertical-align-dropdown {
+    position: absolute;
+    top: 40px;  
+    left: 0px;    
+    width: 96px;
+    display: none;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    flex-direction: row;
+    gap: 0;
+}
+
+.vertical-alignment.active .vertical-align-dropdown {
+  display: flex;
+  gap:0;
+}
+
+.v-align-option .svg-default{
+  position: relative;
+  width: 32px;
+  height: 32px;
+  cursor: pointer; 
+}
+
+/** For Dropdowns to have higher priority than textAreaContainer **/
+.size-dropdown,
+.alignment-dropdown,
+.vertical-align-dropdown {
+  position: absolute;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+/***********************************************************/
+
+#dash4  {
+    position: absolute;
+    left: 279px;
+    top: 14px;
+    bottom: 14px;
+    height: 12px;
+    width: 1px;
+}
+
+.text-color .svg-default {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    height: 32px;
+    width: 36px;
+    cursor: pointer;
+    display: inline-block;
+    left: 280px;
+}
+
+
+.backcolor .svg-default{
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    height: 32px;
+    width: 40px;
+    cursor: pointer;
+    display: inline-block;
+    left: 316px;
+}
+
+
+.border-fill .svg-default{
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    height: 32px;
+    width: 40px;
+    cursor: pointer;
+    display: inline-block;
+    left: 356px;
+}
+
+
+#dash5 {
+    position: absolute;
+    left: 396px;
+    top: 14px;
+    bottom: 14px;
+    height: 12px;
+    width: 1px;
+}
+
+/************Exception of color for Linking*****************/
+
+.linking .svg-default{
+    position: absolute;
+    color: rgba(182, 182, 182, 1);
+    top: 4px;
+    bottom: 4px;
+    height: 32px;
+    width: 44px;
+    cursor: pointer;
+    display: inline-block;
+    left: 397px;
+    fill: currentColor;
+}
+
+.linking .svg-default:hover{
+  background-color: rgba(229, 86, 26, 0.1);
+  color: rgba(229, 86, 26, 1);
+}
+
+.linking .svg-default.active{
+  color: rgba(229, 86, 26, 1);
+}
+/****************************************/
+
+#dash6 {
+    position: absolute;
+    left: 441px;
+    top: 14px;
+    bottom: 14px;
+    height: 12px;
+    width: 1px;
+}
+
+.deleting  .svg-default{
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    height: 32px;
+    width: 44px;
+    cursor: pointer;
+    display: inline-block;
+    left: 442px;
+}
+
+.editable-div {
+  width: 100%;
+  min-width: 119px;
+  height: 100%;
+  min-height: 22px;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #333;
+  padding: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.editable-div:empty:before {
+  content: attr(data-placeholder);
+  color: rgba(153, 153, 153, 1);
+  pointer-events: none;
+  opacity: 1;
+}
+
+
+.text-area-container {
+  position: absolute;
+  top: 430px;
+  left: 95px;
+  min-width: 119px;
+  max-width: 1200px;
+  min-height: 22px;
+  background: transparent;
+  border: 1px solid transparent; /* Visible border */
+  box-sizing: border-box;
+  user-select: none;
+  z-index: 5;
+  display: inline-block; 
+}
+
+.handle {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: -20px;
+  cursor: move;
+  z-index: 10;
+  pointer-events: all;
+  background: transparent;
+}
+
+.resizer {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  bottom: -8px;
+  right: -8px;
+  cursor: nwse-resize;
+  z-index: 10;
+  pointer-events: all;
+  background: transparent;
+}
+
+.text-area-container > div {
+  width: auto; 
+  height: 100%;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+.text-color-input {
+  position: absolute;
+  top: 50px;
+  cursor: pointer;
+  left: 280px;
+  display: block;
+  z-index: 10000;
+}
+
+.body-color-input{
+  position: absolute;
+  top: 50px;
+  cursor: pointer;
+  display: block;
+  left: 316px;
+  z-index: 10000;
+}
+
+.border-color-input{
+  position: absolute;
+  top: 50px;
+  cursor: pointer;
+  display: block;
+  left: 356px;
+  z-index: 10000;
+}
+
+.editable-div a {
+  color: inherit;           
+  text-decoration: underline;
+  cursor: pointer;          
+}
+
+
